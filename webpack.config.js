@@ -5,9 +5,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -49,8 +46,23 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [MiniCSSExtractPlugin.loader, 'css-loader']
+                test    : /\.less$/,
+                exclude : /node_modules/,
+                use     : [
+                    'style-loader',
+                    {
+                        loader  : 'css-loader',
+                        options : {
+                            modules        : true,
+                            importLoaders  : 2,
+                            localIdentName : '[path][name]__[local]--[hash:base64:4]'
+                        }
+                    },
+                    'less-loader',
+                    {
+                        loader  : 'postcss-loader'
+                    }
+                ]
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,

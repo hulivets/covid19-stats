@@ -4,6 +4,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -46,21 +47,26 @@ module.exports = {
     module: {
         rules: [
             {
-                test    : /\.less$/,
-                exclude : /node_modules/,
-                use     : [
-                    'style-loader',
+                test: /\.less$/,
+                exclude: /node_modules/,
+                use: [
+                    MiniCSSExtractPlugin.loader,
                     {
-                        loader  : 'css-loader',
-                        options : {
-                            modules        : true,
-                            importLoaders  : 2,
-                            localIdentName : '[path][name]__[local]--[hash:base64:4]'
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 2,
                         }
                     },
                     'less-loader',
                     {
-                        loader  : 'postcss-loader'
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: [
+                                require('autoprefixer')()
+                            ]
+                        }
                     }
                 ]
             },

@@ -13,6 +13,8 @@ import GlobalStatsPage from './components/pages/GlobalStatsPage';
 import LiveStatsPage from './components/pages/LiveStatsPage';
 import AboutPage from './components/pages/AboutPage';
 
+import './App.less';
+
 export default function App() {
     const { global, live, about } = ROUTES;
 

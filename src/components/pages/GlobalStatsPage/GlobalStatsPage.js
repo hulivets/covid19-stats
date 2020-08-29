@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+
 
 import { CASE_OPTIONS } from '../../../constants/caseOptions';
+import { CHART_FILL_BY_CASE } from '../../../constants/chartFill';
+import { changeFilterDate, changeFilterCase } from '../../../actions/filters';
+import { fetchWorld } from '../../../actions/world';
+import { getDateFrom, getDateTo, getCase } from '../../../selectors/filters';
+import { getWorldList } from '../../../selectors/world';
 
 import Card from '../../ui/Card';
 import DatePicker from '../../ui/Material/DatePicker';
@@ -10,14 +17,30 @@ import Charts from '../../ui/Charts';
 import styles from './GlobalStatsPage.less';
 
 export default function GlobalStatsPage() {
+    const dispatch = useDispatch();
+    const dateFromValue = useSelector(getDateFrom);
+    const dateToValue = useSelector(getDateTo);
+    const caseValue = useSelector(getCase);
+    const chartData = useSelector(getWorldList(caseValue));
+    console.log(chartData)
 
-    const handleChangeDate = (value) => {
-        console.log(value)
-    }
+    useEffect(() => {
+        dispatch(fetchWorld({ from: dateFromValue, to: dateToValue }));
+    }, []);
 
-    const handleChangeSelect = (value) => {
-        console.log(value)
+    const handleChangeDate = (id, value) => {
+        dispatch(changeFilterDate({ id, value }));
+
+        switch (id) {
+            case 'dateFrom':
+                return dispatch(fetchWorld({ from: value, to: dateToValue }));
+            case 'dateTo':
+                return dispatch(fetchWorld({ from: dateFromValue, to: value }));
+            default:
+                break;
+        }
     }
+    const handleChangeSelect = value => dispatch(changeFilterCase(value))
 
     const renderFilters = () => (
         <div className={styles.filterWrapper}>
@@ -25,7 +48,8 @@ export default function GlobalStatsPage() {
                 <Card title='Date from'>
                     <DatePicker
                         label='Date from'
-                        id='date-picker-from'
+                        id='dateFrom'
+                        value={dateFromValue}
                         onChange={handleChangeDate}
                     />
                 </Card>
@@ -34,7 +58,8 @@ export default function GlobalStatsPage() {
                 <Card title='Date to'>
                     <DatePicker
                         label='Date from'
-                        id='date-picker-to'
+                        id='dateTo'
+                        value={dateToValue}
                         onChange={handleChangeDate}
                     />
                 </Card>
@@ -43,6 +68,7 @@ export default function GlobalStatsPage() {
                 <Card title='Select'>
                     <Select
                         options={CASE_OPTIONS}
+                        value={caseValue}
                         onChange={handleChangeSelect}
                     />
                 </Card>
@@ -50,15 +76,25 @@ export default function GlobalStatsPage() {
         </div>
     );
 
-    const renderChart = () => (
-        <div className={styles.chartWrapper}>
-            <div className={styles.cardFilter}>
-                <Card title='Stats'>
-                    <Charts />
-                </Card>
+    const renderChart = () => {
+        const fill = CHART_FILL_BY_CASE[caseValue];
+
+        return (
+            <div className={styles.chartWrapper}>
+                <div className={styles.cardFilter}>
+                    <Card title='Stats'>
+                        <Charts
+                            xDataKey='name'
+                            AreaDataKey={caseValue}
+                            data={chartData}
+                            fill={fill}
+                            strokeFill={fill}
+                        />
+                    </Card>
+                </div>
             </div>
-        </div>
-    );
+        )
+    };
 
     return (
         <div className={styles.GlobalStatsPage}>

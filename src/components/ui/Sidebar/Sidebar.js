@@ -24,7 +24,7 @@ export default function Sidebar() {
                     <div
                         key={link.id}
                         className={cn(styles.navLink, {
-                            active : link.to === window.location.pathname
+                            active : link.to ===  window.location.pathname
                         })}
                     >
                         <Link to={link.to}>{link.content}</Link>

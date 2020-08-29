@@ -8,8 +8,8 @@ import {
 
 const INIT = {
     dateFrom : new Date('04/14/2020').toISOString(),
-    dateTo   : new Date(),
-    country  : '',
+    dateTo   : new Date().toString(),
+    country  : 'andorra',
     case     : 'confirmed'
 };
 

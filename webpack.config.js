@@ -4,7 +4,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -71,8 +70,17 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|svg|gif)$/,
-                use: ['file-loader']
+                test: /\.(otf|eot|ttf|ttc|woff|jpe?g|png|gif|svg)$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 24000
+                        }
+
+                    }
+                ]
             },
             {
                 test: /\.js$/,

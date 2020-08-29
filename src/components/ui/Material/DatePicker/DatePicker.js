@@ -14,7 +14,6 @@ export default function DatePicker(props) {
       if (!onChange) return;
 
       const valueToSet = new Date(value).toISOString();
-      console.log(value)
 
       onChange(id, valueToSet);
     };

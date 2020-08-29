@@ -22,7 +22,6 @@ export default function GlobalStatsPage() {
     const dateToValue = useSelector(getDateTo);
     const caseValue = useSelector(getCase);
     const chartData = useSelector(getWorldList(caseValue));
-    console.log(chartData)
 
     useEffect(() => {
         dispatch(fetchWorld({ from: dateFromValue, to: dateToValue }));
@@ -45,7 +44,7 @@ export default function GlobalStatsPage() {
     const renderFilters = () => (
         <div className={styles.filterWrapper}>
             <div className={styles.cardFilter}>
-                <Card title='Date from'>
+                <Card title='By date from'>
                     <DatePicker
                         label='Date from'
                         id='dateFrom'
@@ -55,7 +54,7 @@ export default function GlobalStatsPage() {
                 </Card>
             </div>
             <div className={styles.cardFilter}>
-                <Card title='Date to'>
+                <Card title='By date to'>
                     <DatePicker
                         label='Date from'
                         id='dateTo'
@@ -65,10 +64,11 @@ export default function GlobalStatsPage() {
                 </Card>
             </div>
             <div className={styles.cardFilter}>
-                <Card title='Select'>
+                <Card title='By case'>
                     <Select
                         options={CASE_OPTIONS}
                         value={caseValue}
+                        label='Select case'
                         onChange={handleChangeSelect}
                     />
                 </Card>
@@ -78,13 +78,15 @@ export default function GlobalStatsPage() {
 
     const renderChart = () => {
         const fill = CHART_FILL_BY_CASE[caseValue];
+        const from = new Date(dateFromValue).toLocaleDateString();
+        const to = new Date(dateToValue).toLocaleDateString();
 
         return (
             <div className={styles.chartWrapper}>
                 <div className={styles.cardFilter}>
-                    <Card title='Stats'>
+                    <Card title={`Statistic from ${from} to ${to} by ${caseValue}`}>
                         <Charts
-                            xDataKey='name'
+                            xDataKey=' '
                             AreaDataKey={caseValue}
                             data={chartData}
                             fill={fill}

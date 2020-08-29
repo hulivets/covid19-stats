@@ -12,6 +12,12 @@ import {
     fetchWorldFailure
 } from '../actions/world';
 
+import {
+    fetchLiveRequest,
+    fetchLiveSuccess,
+    fetchLiveFailure
+} from '../actions/live';
+
 const INIT = {
     isLoading    : false
 };
@@ -33,6 +39,15 @@ export const view = createReducer(INIT, {
         state.isLoading = false;
     },
     [fetchWorldFailure]: state => {
+        state.isLoading = false;
+    },
+    [fetchLiveRequest]: state => {
+        state.isLoading = true;
+    },
+    [fetchLiveSuccess]: state => {
+        state.isLoading = false;
+    },
+    [fetchLiveFailure]: state => {
         state.isLoading = false;
     }
 });

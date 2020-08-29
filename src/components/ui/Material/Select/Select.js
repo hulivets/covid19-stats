@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import styles from './Select.less';
 
 export default function MaterialSelect(props) {
-    const { options, value, onChange } = props;
+    const { options, value, label, onChange } = props;
 
     const handleChange = (e) => {
         if (!onChange) return;
@@ -19,7 +19,7 @@ export default function MaterialSelect(props) {
     return (
         <div className={styles.MaterialSelect}>
             <FormControl className={styles.formControl}>
-                <InputLabel>Select case</InputLabel>
+                <InputLabel>{label}</InputLabel>
                 <Select
                     value={value}
                     onChange={handleChange}

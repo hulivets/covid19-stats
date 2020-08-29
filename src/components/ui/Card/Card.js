@@ -8,7 +8,9 @@ export default function Card(props) {
     return (
         <div className={styles.Card}>
             <div className={styles.title}>{title}</div>
-            {children}
+            <div className={styles.content}>
+                {children}
+            </div>
         </div>
     )
 }

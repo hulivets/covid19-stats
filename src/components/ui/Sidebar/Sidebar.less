@@ -22,24 +22,16 @@
 
     .nav {
         .navLink {
-            border-bottom: solid 1px @c-white;
+            border-bottom: solid 1px #888;
 
             &:last-child {
                 border-bottom: none;
             }
 
             &.active {
-                background-color: #343452;
-                transition: all 0.3 ease-in-out;
-
-                &:hover {
-                    background-color: #343452;
+                a {
+                    color: #1dc4e9;
                 }
-            }
-
-            &:hover {
-                background-color: rgba(#343452, 0.3);
-                transition: all 0.3 ease-in-out;
             }
 
             a {
@@ -48,6 +40,11 @@
                 color: @c-white;
                 text-decoration: none;
                 transition: color .3 ease-in-out;
+
+                &:hover {
+                    color: #1dc4e9;
+                    transition: color .3 ease-in-out;
+                } 
             }
         }
     }

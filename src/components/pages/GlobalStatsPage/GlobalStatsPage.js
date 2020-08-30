@@ -85,7 +85,9 @@ export default function GlobalStatsPage() {
         return (
             <div className={styles.chartWrapper}>
                 <div className={styles.cardFilter}>
-                    <Card title={`Statistic by ${caseValue} from ${from} to ${to}`}>
+                    <Card
+                        className={styles.card}
+                        title={`Statistic by ${caseValue} from ${from} to ${to}`}>
                         <AreaChart
                             xDataKey=' '
                             areaDataKey={caseValue}

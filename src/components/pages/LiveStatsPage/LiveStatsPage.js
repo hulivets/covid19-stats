@@ -83,7 +83,9 @@ export default function LiveStatsPage() {
         return (
             <div className={styles.chartWrapper}>
                 <div className={styles.cardFilter}>
-                    <Card title={`Statistic by ${caseValue} in ${country} from ${from}`}>
+                    <Card 
+                        className={styles.card}
+                        title={`Statistic by ${caseValue} in ${country} from ${from}`}>
                         <AreaChart
                             xDataKey='date'
                             areaDataKey={caseValue}

@@ -1,4 +1,5 @@
-import React, { Children } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './Card.less';
 
@@ -13,4 +14,14 @@ export default function Card(props) {
             </div>
         </div>
     )
+}
+
+Card.propTypes = {
+    title    : PropTypes.string,
+    children : PropTypes.node
+};
+
+Card.defaultProps = {
+    title    : '',
+    children : null
 }

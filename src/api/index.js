@@ -8,7 +8,7 @@ export default function({ url } = {}) {
 
     return {
         apiClient : api,
-        countrues : new CountriesAPI({ apiClient: api}),
+        countries : new CountriesAPI({ apiClient: api}),
         world     : new WorldAPI({ apiClient: api }),
         live      : new LiveAPI({ apiClient : api})
     };

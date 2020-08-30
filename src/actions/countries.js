@@ -13,7 +13,7 @@ export function fetchCountries() {
         try {
             dispatch(fetchCountriesRequest());
 
-            const data = await api.countrues.list();
+            const data = await api.countries.list();
 
             dispatch(fetchCountriesSuccess());
             

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 
 import styles from './Loader.less';
 
 const cn = classnames.bind(styles);
 
-const Loader = props => {
+export default function Loader(props) {
     const { width, height, isLoading } = props;
     const LoaderCN = cn('Loader', { show: isLoading });
 
@@ -20,4 +21,14 @@ const Loader = props => {
     );
 };
 
-export default Loader;
+Loader.propTypes = {
+    width     : PropTypes.number,
+    height    : PropTypes.number,
+    isLoading : PropTypes.bool
+};
+
+Loader.defaultProps = {
+    width     : 50,
+    height    : 50,
+    isLoading : false
+};

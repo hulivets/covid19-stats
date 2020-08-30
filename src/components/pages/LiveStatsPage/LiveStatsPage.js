@@ -12,7 +12,7 @@ import { getCountryOptions } from '../../../utils/countries';
 import Card from '../../ui/Card';
 import DatePicker from '../../ui/Material/DatePicker';
 import Select from '../../ui/Material/Select';
-import Charts from '../../ui/Charts';
+import AreaChart from '../../ui/Charts';
 
 import styles from './LiveStatsPage.less';
 
@@ -81,9 +81,9 @@ export default function LiveStatsPage() {
             <div className={styles.chartWrapper}>
                 <div className={styles.cardFilter}>
                     <Card title='Stats'>
-                        <Charts
+                        <AreaChart
                             xDataKey='date'
-                            AreaDataKey={caseValue}
+                            areaDataKey={caseValue}
                             data={chartData}
                             fill={fill}
                             strokeFill={fill}

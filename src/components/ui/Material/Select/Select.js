@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -11,6 +12,7 @@ export default function MaterialSelect(props) {
 
     const handleChange = (e) => {
         if (!onChange) return;
+
         const { value } = e.target;
 
         onChange(value)
@@ -37,3 +39,19 @@ export default function MaterialSelect(props) {
         </div>
     )
 }
+
+MaterialSelect.propTypes = {
+    label    : PropTypes.string,
+    id       : PropTypes.string,
+    value    : PropTypes.string,
+    options  : PropTypes.array,
+    onChange : PropTypes.func
+};
+  
+MaterialSelect.defaultProps = {
+    label    : '',
+    id       : '',
+    value    : '',
+    options  : [],
+    onChange : undefined
+};

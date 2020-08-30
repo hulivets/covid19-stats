@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
+
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker
@@ -10,7 +12,7 @@ import styles from './DatePicker.less';
 export default function DatePicker(props) {
     const { label, id, value, onChange } = props;
 
-    const handleDateChange = (value) => {
+    const handleChangeDate = (value) => {
       if (!onChange) return;
 
       const valueToSet = new Date(value).toISOString();
@@ -29,7 +31,7 @@ export default function DatePicker(props) {
                 label={label}
                 format="dd/MM/yyyy"
                 value={value}
-                onChange={handleDateChange}
+                onChange={handleChangeDate}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
@@ -38,3 +40,17 @@ export default function DatePicker(props) {
     </div>
   )
 }
+
+DatePicker.propTypes = {
+  label    : PropTypes.string,
+  id       : PropTypes.string,
+  value    : PropTypes.string,
+  onChange : PropTypes.func
+};
+
+DatePicker.defaultProps = {
+  label    : '',
+  id       : '',
+  value    : '',
+  onChange : undefined
+};

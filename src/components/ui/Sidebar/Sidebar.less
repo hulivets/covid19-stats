@@ -1,0 +1,51 @@
+@import '../../../assets/variables.less';
+
+.Sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 264px;
+    height: 100vh;
+    background-color: #3F4D67;
+    box-shadow: 1px 0 20px 0 #3F4D67;
+
+    .header {
+        padding: 25px;
+        color: @c-white;
+        font-size: 24px;
+        font-weight: 500;
+
+        span {
+            font-size: 16px;
+        }
+    }
+
+    .nav {
+        .navLink {
+            border-bottom: solid 1px #888;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &.active {
+                a {
+                    color: #1dc4e9;
+                }
+            }
+
+            a {
+                display: block;
+                padding: 15px 25px;
+                color: @c-white;
+                text-decoration: none;
+                transition: color .3 ease-in-out;
+
+                &:hover {
+                    color: #1dc4e9;
+                    transition: color .3 ease-in-out;
+                } 
+            }
+        }
+    }
+}

@@ -14,29 +14,23 @@ export default class ApiClient {
         }, repeatAmount);
     }
 
-    async request({ url, method, params = {}, body = {} }) {
+    async request({ url, method, params = {} }) {
         const query = Object.keys(params).length
             ? `?${queryString.stringify(params)}`
             : '';
 
-        const bodyData = method !== 'GET'
-            ? JSON.stringify(body)
-            : undefined;
-
         try {
             const response = await fetch(
-                `${this.url}/${url}/${query}`,
+                `${this.url}/${url}${query}`,
                 {
                     method,
                     headers: {
                         'Cache-Control'               : 'no-cache',
-                        pragma                        : 'no-cache',
                         'Content-Type'                : 'application/json',
                         'Access-Control-Allow-Origin' : '*'
                     },
                     withCredentials : true,
                     crossDomain     : false,
-                    body            : bodyData
                 }
             );
 

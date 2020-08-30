@@ -1,12 +1,8 @@
 const path = require('path');
-const fs = require('fs');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -25,7 +21,8 @@ module.exports = {
     },
     devServer: {
         port: 3000,
-        hot: isDev
+        hot: isDev,
+        historyApiFallback: true
     },
     plugins: [
         new HTMLWebpackPlugin({
@@ -48,12 +45,41 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [MiniCSSExtractPlugin.loader, 'css-loader']
+                test: /\.less$/,
+                exclude: /node_modules/,
+                use: [
+                    MiniCSSExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 2,
+                        }
+                    },
+                    'less-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: [
+                                require('autoprefixer')()
+                            ]
+                        }
+                    }
+                ]
             },
             {
-                test: /\.(png|jpg|svg|gif)$/,
-                use: ['file-loader']
+                test: /\.(otf|eot|ttf|ttc|woff|jpe?g|png|gif|svg)$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 24000
+                        }
+
+                    }
+                ]
             },
             {
                 test: /\.js$/,

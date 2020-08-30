@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 
 
@@ -26,7 +26,7 @@ export default function GlobalStatsPage() {
 
     useEffect(() => {
         dispatch(fetchWorld({ from: dateFromValue, to: dateToValue }));
-    }, []);
+    }, [dateFromValue]);
 
     const handleChangeDate = (id, value) => {
         dispatch(changeFilterDate({ id, value }));
@@ -47,7 +47,7 @@ export default function GlobalStatsPage() {
             <div className={styles.cardFilter}>
                 <Card title='By date from'>
                     <DatePicker
-                        label='Date from'
+                        label='Select date from'
                         id='dateFrom'
                         value={dateFromValue}
                         onChange={handleChangeDate}
@@ -57,7 +57,7 @@ export default function GlobalStatsPage() {
             <div className={styles.cardFilter}>
                 <Card title='By date to'>
                     <DatePicker
-                        label='Date from'
+                        label='Select date to'
                         id='dateTo'
                         value={dateToValue}
                         onChange={handleChangeDate}

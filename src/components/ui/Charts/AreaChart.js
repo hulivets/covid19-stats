@@ -7,6 +7,17 @@ import styles from './AreaChart.less';
 
 export default function Chart(props) {
     const { data, xDataKey, areaDataKey, fill, strokeFill } = props;
+
+    const renderEmptyMessage = () => {
+        if (!data.length) {
+            return (
+                <div className={styles.empty}>
+                  <div className={styles.title}>There is no data to show...</div>
+                </div>
+            )
+        }
+    };
+
     const renderLineChart = () => (
         <AreaChart width={900} height={350} data={data}>
           <CartesianGrid strokeDasharray="2 2" />
@@ -24,6 +35,7 @@ export default function Chart(props) {
       return (
           <div className={styles.Charts}>
               {renderLineChart()}
+              {renderEmptyMessage()}
           </div>
       )
 }

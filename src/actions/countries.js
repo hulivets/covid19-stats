@@ -3,6 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 import api from '../apiSingleton';
 import { save } from '../utils/sessionStorage';
 import { COUNTRIES_KEY } from '../constants/keys';
+import { getCountryOptions } from '../utils/countries';
 
 export const fetchCountriesRequest = createAction('FETCH_COUNTRIES_REQUEST');
 export const fetchCountriesSuccess = createAction('FETCH_COUNTRIES_SUCCESS');
@@ -17,7 +18,7 @@ export function fetchCountries() {
 
             dispatch(fetchCountriesSuccess());
             
-            save(COUNTRIES_KEY, data)
+            save(COUNTRIES_KEY, getCountryOptions(data))
         } catch (err) {
             dispatch(fetchCountriesFailure());
         }

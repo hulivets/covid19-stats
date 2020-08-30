@@ -4,6 +4,7 @@ import { useDispatch, useSelector} from 'react-redux';
 
 import { CASE_OPTIONS } from '../../../constants/caseOptions';
 import { CHART_FILL_BY_CASE } from '../../../constants/chartFill';
+import { formatDate } from '../../../utils/date';
 import { changeFilterDate, changeFilterCase } from '../../../actions/filters';
 import { fetchWorld } from '../../../actions/world';
 import { getDateFrom, getDateTo, getCase } from '../../../selectors/filters';
@@ -78,13 +79,13 @@ export default function GlobalStatsPage() {
 
     const renderChart = () => {
         const fill = CHART_FILL_BY_CASE[caseValue];
-        const from = new Date(dateFromValue).toLocaleDateString();
-        const to = new Date(dateToValue).toLocaleDateString();
+        const from = formatDate(dateFromValue);
+        const to = formatDate(dateToValue);
 
         return (
             <div className={styles.chartWrapper}>
                 <div className={styles.cardFilter}>
-                    <Card title={`Statistic from ${from} to ${to} by ${caseValue}`}>
+                    <Card title={`Statistic by ${caseValue} from ${from} to ${to}`}>
                         <AreaChart
                             xDataKey=' '
                             areaDataKey={caseValue}

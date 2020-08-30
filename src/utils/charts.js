@@ -1,4 +1,4 @@
-// TotalConfirmed, TotalRecovered, TotalDeaths
+import { formatDate } from './date';
 
 const CASES = {
     confirmed : 'NewConfirmed',
@@ -24,7 +24,7 @@ export const getWorldChartData = (data = [], currentCase) => {
 
 export const getChartDataByCountry = (data = [], currentCase) => {
     return data.map(obj => ({
-        date  : new Date(obj['Date']).toLocaleDateString(),
+        date  : formatDate(new Date(obj['Date'])),
         [currentCase] : obj[BY_COUNTRY_CASES[currentCase]]
     }))
 };

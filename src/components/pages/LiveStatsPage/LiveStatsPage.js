@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { CHART_FILL_BY_CASE } from '../../../constants/chartFill';
 import { CASE_OPTIONS } from '../../../constants/caseOptions';
+import { formatDate } from '../../../utils/date';
 import { getCountry, getDateFrom, getCase } from '../../../selectors/filters';
 import { getLiveCountryList } from '../../../selectors/live';
 import { changeFilterDate, changeFilterCase, changeFilterCountry } from '../../../actions/filters';
@@ -76,11 +77,13 @@ export default function LiveStatsPage() {
 
     const renderChart = () => {
         const fill = CHART_FILL_BY_CASE[caseValue];
+        const from = formatDate(dateFromValue);
+        const country = (countryValue[0].toUpperCase() || countryValue[0]) + countryValue.slice(1)
 
         return (
             <div className={styles.chartWrapper}>
                 <div className={styles.cardFilter}>
-                    <Card title='Stats'>
+                    <Card title={`Statistic by ${caseValue} in ${country} from ${from}`}>
                         <AreaChart
                             xDataKey='date'
                             areaDataKey={caseValue}

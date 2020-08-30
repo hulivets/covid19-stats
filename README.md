@@ -12,3 +12,11 @@
 
 ## TESTS
 1. `npm run test`
+
+## SCREENSHOTS
+
+![Screenshot from 2020-08-31 01-28-02](https://user-images.githubusercontent.com/48622868/91670825-c2a4fb00-eb29-11ea-99f2-6f659c3730b7.png)
+![Screenshot from 2020-08-31 01-28-17](https://user-images.githubusercontent.com/48622868/91670826-c3d62800-eb29-11ea-8ee1-3b5660a0cfa5.png)
+![Screenshot from 2020-08-31 01-28-30](https://user-images.githubusercontent.com/48622868/91670827-c3d62800-eb29-11ea-8698-0b14d357a170.png)
+![Screenshot from 2020-08-31 01-28-48](https://user-images.githubusercontent.com/48622868/91670828-c46ebe80-eb29-11ea-8437-4695aa541d40.png)
+![Screenshot from 2020-08-31 01-28-51](https://user-images.githubusercontent.com/48622868/91670829-c46ebe80-eb29-11ea-922a-b80fbcabab65.png)
